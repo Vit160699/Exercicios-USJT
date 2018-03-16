@@ -92,6 +92,7 @@ public class TestePais {
 		long populacao = pais.getPopulacao();
 		copia.setPopulacao(populacao);
 		assertEquals("Testando maior populacao",pais.getPopulacao(),copia.getPopulacao());
+		System.out.println(pais.toString());
 }
 	
 	@Test
@@ -100,22 +101,23 @@ public class TestePais {
 		paisService.menorArea(pais);
 		double area = pais.getArea();
 		copia.setArea(area);
+		System.out.println(pais.toString());
 		assertEquals("Testando menor area",pais.getPopulacao(),copia.getPopulacao());
 		
 	
 		
 	}
 	
-	/*@Test
-	public void test06Array() {
-		System.out.println("Vetor de 3 paises");
-		String[] vet = pais.vetorTresPaises();
-		System.out.println(vet);
-		
-		assertEquals("Testando Vetor de paises",vet.length,3);
-	}*/
-
-	
+//	@Test
+//	public void teste7() {
+//		System.out.println("Vetor de paises");
+//		String[] array = PaisService.arrayPais();
+//		for(int i = 0; i < array.length; i++) {
+//			System.out.println(array[i]);
+//		}
+//		assertEquals(array.length,3,"Testando Vetor de paises");
+//	}
+//	
 	
 
 

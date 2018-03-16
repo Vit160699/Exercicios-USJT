@@ -94,90 +94,76 @@ public class PaisDAO {
 			}
 			
 			public void maiorPopulacao(Pais pais){
-				String sqlSelect = "SELECT * FROM pais WHERE populacaoPais = (SELECT MAX(populacaoPais) FROM pais )";
-				
-				try (Connection conn = ConnectionFactory.obtemConexao();
-						PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-						ResultSet rs = stm.executeQuery();
+				try {
 					
-						if (rs.next()) {
-							pais.setNome(rs.getString("nomePais"));
-							pais.setPopulacao(rs.getLong("populacaoPais"));
-							
-						} else {
-							System.out.println("Deu pau");
-						}
+					String sqlQuery =  "Select * from pais where populacaoPais = (Select Max(populacaoPais) from pais)";
+					Connection conn  = ConnectionFactory.obtemConexao();
+					PreparedStatement stm = conn.prepareStatement(sqlQuery);
 					
-					} catch (SQLException e) {
-						System.out.print(e);
+					ResultSet rs = stm.executeQuery();
+					
+					if(rs.next()) {
+						pais.setId(rs.getInt("idPais"));
+						pais.setNome(rs.getString("nomePais"));
+						pais.setArea(rs.getDouble("areaPais"));
+						pais.setPopulacao(rs.getLong("populacaoPais"));
 					}
+					
+					}catch(SQLException e) {
+						
+						System.out.println(e);
+					}
+					
 			}
 			
 			public void menorArea(Pais pais){
-				String sqlSelect = "SELECT * FROM pais WHERE areaPais = (SELECT MIN(areaPais) FROM  pais)";
-				
-				try (Connection conn = ConnectionFactory.obtemConexao();
-						PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-						ResultSet rs = stm.executeQuery();
+				try {
+					String sqlQuery = "Select * from pais where areaPais = (Select Min(areaPais) from pais)";
+					Connection conn  = ConnectionFactory.obtemConexao();
+					PreparedStatement stm = conn.prepareStatement(sqlQuery);
 					
-						if (rs.next()) {
-							pais.setNome(rs.getString("nomePais"));
-							pais.setPopulacao(rs.getLong("populacaoPais"));
-							
-						} else {
-							System.out.println("Deu pau");
-						}
 					
-					} catch (SQLException e) {
-						System.out.print(e);
+					ResultSet rs = stm.executeQuery();
+					
+					if(rs.next()) {
+						pais.setId(rs.getInt("idPais"));
+						pais.setNome(rs.getString("nomePais"));
+						pais.setArea(rs.getDouble("areaPais"));
+						pais.setPopulacao(rs.getLong("populacaoPais"));
+					}
+					
+					}catch(SQLException e) {
+						
+						System.out.println(e);
 					}
 			}
 			
 			public String[] vetorTresPaises(Pais pais) {
 				
-				String sqlSelect = "SELECT nomePais FROM pais ORDER BY nomePais";
 				String[] vet = new String[3];
-				int j = 0 ;
+				int cont = 0;
 				
+				try {
+				String sqlQuery = "Select nome from pais order by nome";
+				Connection conn = ConnectionFactory.obtemConexao();
 				
-				try (Connection conn = ConnectionFactory.obtemConexao();
-						PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-						ResultSet rs = stm.executeQuery();
-					
-						while(rs.next()&& j < 3) {
-							vet[j] = rs.getString("nomePais");
-							j++;
-							
-						}}catch (SQLException e) {
-							System.out.print(e);
-						}
+				PreparedStatement stm = conn.prepareStatement(sqlQuery);
+				ResultSet rs = stm.executeQuery();
+				
+				while(rs.next() && cont < 3) {
+					vet[cont] = rs.getString("nome");
+					cont++;
+				}
+				
+				}catch(SQLException e) {
+					System.out.println(e);
+				}
+				
 				return vet;
+			
+			}
 			}	
 		
-		/*	@SuppressWarnings({ "rawtypes", "unchecked" })
-			public ArrayList carregar(int id) {
-			ArrayList retorno = new ArrayList();
-			String sqlSelect = "SELECT nomePais, populacaoPais,areaPais FROM pais WHERE idPais= ?";
-			// usando o try with resources do Java 7, que fecha o que abriu
-			try (Connection conn = obtemConexao();
-			PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-			stm.setInt(1, id);
-			try (ResultSet rs = stm.executeQuery();) {
-			if (rs.next()) {
-			retorno.add(rs.getString("nomePais"));
-			retorno.add(rs.getLong("populacaoPais"));
-			retorno.add(rs.getDouble("areaPais"));
-			} else {
-			retorno.add(null);
-			retorno.add(null);
-			}
-			} catch (SQLException e) {
-			e.printStackTrace();
-			}
-			} catch (SQLException e1) {
-			System.out.print(e1.getStackTrace());
-			} return retorno;
-			}*/
 			
 			
-}
+
