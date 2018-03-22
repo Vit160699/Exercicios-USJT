@@ -31,6 +31,10 @@ public class PaisService {
 			dao.menorArea(pais);
 		}
 		
+		public String[] vetorTresPaises() {
+			return dao.vetorTresPaises();
+}
+		
 
 	}
 

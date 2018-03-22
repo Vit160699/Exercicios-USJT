@@ -108,16 +108,15 @@ public class TestePais {
 		
 	}
 	
-//	@Test
-//	public void teste7() {
-//		System.out.println("Vetor de paises");
-//		String[] array = PaisService.arrayPais();
-//		for(int i = 0; i < array.length; i++) {
-//			System.out.println(array[i]);
-//		}
-//		assertEquals(array.length,3,"Testando Vetor de paises");
-//	}
-//	
+	@Test
+	public void teste7() {
+		System.out.println("Vetor de paises");
+		String[] array = paisService.vetorTresPaises();
+		for(int i = 0; i < array.length; i++) {
+			System.out.println(array[i]);
+		}
+		assertEquals("Testando Vetor de paises",array.length,3);
+}
 	
 
 

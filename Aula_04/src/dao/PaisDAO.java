@@ -138,20 +138,20 @@ public class PaisDAO {
 					}
 			}
 			
-			public String[] vetorTresPaises(Pais pais) {
+			public String[] vetorTresPaises() {
 				
 				String[] vet = new String[3];
 				int cont = 0;
 				
 				try {
-				String sqlQuery = "Select nome from pais order by nome";
+				String sqlQuery = "SELECT nomePais FROM pais ORDER BY nomePais";
 				Connection conn = ConnectionFactory.obtemConexao();
 				
 				PreparedStatement stm = conn.prepareStatement(sqlQuery);
 				ResultSet rs = stm.executeQuery();
 				
 				while(rs.next() && cont < 3) {
-					vet[cont] = rs.getString("nome");
+					vet[cont] = rs.getString("nomePais");
 					cont++;
 				}
 				
@@ -162,7 +162,8 @@ public class PaisDAO {
 				return vet;
 			
 			}
-			}	
+
+}	
 		
 			
 			
